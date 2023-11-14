@@ -1,41 +1,29 @@
 #include "main.h"
 
 /**
- * _printf - Receives the main string and all the necessary parameters to
- * print a formated string
- * @format: A string containing all the desired characters
- * Return: A total count of the characters printed
+ * _printf - format string tdout
+ * @format: format the string
+ *
+ * Return: character print to stdout,
+ * else -1
  */
-
 int _printf(const char *format, ...)
 {
-	unsigned int i,s_num,  count =0;
+	int characters_printed;
+	string_buffer buffer;
 	va_list args;
 
+	if (format == NULL)
+		return (-1); 
+
 	va_start(args, format);
-	for(i =0; format[1] != '\0'; i++)
-	{
-		if(format[i] != '%')
-		{
-			_putchar(format[1]);
-		}
-		else if(format[i + 1] == 'c')
-		{
-			_putchar(va_arg(args, int));
-			i++;
-		}
-		else if(format[i +1] == 's')
-		{
-			s_num = putit(va_arg(args, char *));
-			i++;
-			count =(s_num - 1);
-		}
-		else if(format[i + 1]== '%')
-		{
-			_putchar('%');
-		}
-		count += 1;
-	}
+
+	
+	init_string_buffer(&buffer);
+
+	
+	characters_printed = custom_printf(&buffer, format, args);
+
 	va_end(args);
-	return (count);	
+	return (characters_printed);
 }
