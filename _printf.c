@@ -1,33 +1,41 @@
 #include "main.h"
+
 /**
- *
- * Printf: To print formatable text
- *
- * @format: My format specifier
- * Return: no of bytes to be printed
+ * _printf - Receives the main string and all the necessary parameters to
+ * print a formated string
+ * @format: A string containing all the desired characters
+ * Return: A total count of the characters printed
  */
-int _printf(const char * format, ...)
+
+int _printf(const char *format, ...)
 {
-	unsigned int i, printer = 0;
+	unsigned int i,s_num,  count =0;
+	va_list args;
 
-	va_list data;
-
-	va_start(data, format);
-
-	for(i=0; format[i] != '\0'; i++)
+	va_start(args, format);
+	for(i =0; format[1] != '\0'; i++)
 	{
 		if(format[i] != '%')
 		{
-			_putchar(format[i]);
+			_putchar(format[1]);
 		}
-		else if(format[i] == '%' && format[i + 1] == 'c')
+		else if(format[i + 1] == 'c')
 		{
-			_putchar(va_arg(data, int));
+			_putchar(va_arg(args, int));
 			i++;
 		}
-
-		printer += 1;
+		else if(format[i +1] == 's')
+		{
+			s_num = putit(va_arg(args, char *));
+			i++;
+			count =(s_num - 1);
+		}
+		else if(format[i + 1]== '%')
+		{
+			_putchar('%');
+		}
+		count += 1;
 	}
-	va_end(data);
-	return(printer);
+	va_end(args);
+	return (count);	
 }
