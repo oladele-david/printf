@@ -7,7 +7,7 @@
  * Return: success is 1.
  * On error, -1 is printed.
  */
-int _putchar(char c)
+int _putchar(char x)
 {
-	return (write(1, &c, 1));
+	return (write(1, &x, 1));
 }
