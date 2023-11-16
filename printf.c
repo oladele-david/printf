@@ -12,8 +12,10 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	int num_printed = 0;
+	char str[100];
 
 	va_start(args, format);
+
 	while (*format)
 	{
 		if (*format == '%')
@@ -27,8 +29,6 @@ int _printf(const char *format, ...)
 					num_printed += _puts(va_arg(args, char *));
 					break;
 				case 'd':
-					char str[100];
-
 					num_printed += _puts(str);
 					break;
 				case '%':
