@@ -25,6 +25,12 @@ int _printf(const char *format, ...)
 				case 's':
 					num_printed += _puts(va_arg(args, char *));
 					break;
+				case 'd':
+					int num = va_arg(args, int);
+					char str[100];
+					int len = _itoa(num, str, 10);
+					num_printed += _puts(str);
+					break;
 				case '%':
 					num_printed += _putchar('%');
 					break;
