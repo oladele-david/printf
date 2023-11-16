@@ -7,6 +7,7 @@
 #include <limits.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <string.h>
 
 int _itoa(int num, char *str, int base);
 int _puts(const char *str);

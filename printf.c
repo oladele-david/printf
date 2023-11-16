@@ -12,7 +12,7 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	int num_printed = 0;
-	/* char str[100]; */
+	char buffer[1024];
 
 	va_start(args, format);
 
@@ -26,9 +26,11 @@ int _printf(const char *format, ...)
 					num_printed += _putchar(va_arg(args, int));
 					break;
 				case 's':
-					num_printed += _puts(va_arg(args, char *));
+					strcpy(buffer, va_arg(args, char *));
+					buffer[strlen(buffer)] = '\0';
+					num_printed += _puts(buffer);
+					/* num_printed += _puts(va_arg(args, char *)); */
 					break;
-				/* case 'd': num_printed += _puts(str); break; */
 				case '%':
 					num_printed += _putchar('%');
 					break;
