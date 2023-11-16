@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * _printf - _printf function
- * @format: format string
- * Return: number of characters printed
- * Description: This is the printf function that prints a string
+ *_printf - _printf function
+ *@format: format string
+ *@Return: number of characters printed
+ *@Description: This is the printf function that prints a string
  */
 
 int _printf(const char *format, ...)
@@ -26,11 +26,12 @@ int _printf(const char *format, ...)
 					num_printed += _puts(va_arg(args, char *));
 					break;
 				case 'd':
-					int num = va_arg(args, int);
-					char str[100];
-					int len = _itoa(num, str, 10);
-					num_printed += _puts(str);
-					break;
+					{
+						char str[100];
+						num_printed += _puts(str);
+						break;
+					}
+
 				case '%':
 					num_printed += _putchar('%');
 					break;
@@ -49,5 +50,6 @@ int _printf(const char *format, ...)
 	}
 
 	va_end(args);
-	return (num_printed);
+	return num_printed;
 }
+

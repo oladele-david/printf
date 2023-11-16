@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include "main.h"
 
 /**
@@ -7,7 +8,7 @@
  *@str: The character array to store the string representation of the integer.
  *@base: The base of the numeral system.
  *
- *@return: The length of the string of the integer, or -1 on error.
+ *Return: The length of the string of the integer, or -1 on error.
  *Description:
  *  The length of the string representation of the integer, or -1 on error.
  */
