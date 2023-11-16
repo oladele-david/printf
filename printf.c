@@ -9,44 +9,39 @@
 
 int _printf(const char *format, ...)
 {
-	va_list arggs_lists;
-	int custom_index = 0;
-	int characters = 0;
+	va_list args;
+	int num_printed = 0;
 
-	if (!format || (format[0] == '%' && !format[1]))
+	va_start(args, format);
+	while (*format)
 	{
-		return (-1);
-	}
-	va_start(arggs_lists, format);
-	while (format && format[custom_index])
-	{
-		if (format[custom_index] == '%')
+		if (*format == '%')
 		{
-			custom_index++;
-			if (format[custom_index] == '%')
+			switch (*++format)
 			{
-				_putchar('%');
-				characters++;
-			}
-			else if (format[custom_index])
-			{
-				int add_characters = handle_format(format[custom_index], arggs_lists);
-
-				characters += add_characters;
-			}
-			else
-			{
-				return (characters);
+				case 'c':
+					num_printed += _putchar(va_arg(args, int));
+					break;
+				case 's':
+					num_printed += _puts(va_arg(args, char *));
+					break;
+				case '%':
+					num_printed += _putchar('%');
+					break;
+				default:
+					_putchar('%');
+					_putchar(*format);
+					break;
 			}
 		}
 		else
 		{
-			_putchar(format[custom_index]);
-			characters++;
+			num_printed += _putchar(*format);
 		}
-		custom_index++;
+
+		format++;
 	}
 
-	va_end(arggs_lists);
-	return (characters);
+	va_end(args);
+	return (num_printed);
 }
